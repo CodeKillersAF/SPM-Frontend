@@ -3,11 +3,11 @@ import './footer.css';
 
 function Footer() {
     return (
-        <section class="footer">
+        <section className="footer">
 
-    <div class="box-container">
+    <div className="box-container">
 
-        <div class="box">
+        <div className="box">
             <h3>locations</h3>
             <a href="#">sri lanka</a>
             <a href="#">japan</a>
@@ -16,7 +16,7 @@ function Footer() {
             <a href="#">france</a>
         </div>
 
-        <div class="box">
+        <div className="box">
             <h3>quick links</h3>
             <a href="#">home</a>
             <a href="#">table</a>
@@ -26,7 +26,7 @@ function Footer() {
             <a href="#">order</a>
         </div>
 
-        <div class="box">
+        <div className="box">
             <h3>contact info</h3>
             <a href="#">+123-456-7890</a>
             <a href="#">+111-222-3333</a>
@@ -35,7 +35,7 @@ function Footer() {
             <a href="#">Sri lanka - ingiriya - 12440</a>
         </div>
 
-        <div class="box">
+        <div className="box">
             <h3>follow us</h3>
             <a href="#">facebook</a>
             <a href="#">twitter</a>
@@ -45,7 +45,7 @@ function Footer() {
 
     </div>
 
-    <div class="credit"> copyright @ 2021 by <span>SPM Web Project</span> </div>
+    <div className="credit"> copyright @ 2021 by <span>SPM Web Project</span> </div>
 
 </section>
 
