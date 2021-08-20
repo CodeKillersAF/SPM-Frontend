@@ -17,6 +17,11 @@ function Navbar() {
                  <Link to="/review">Review</Link>  
                  <Link to="/order">Order</Link>  
              </div>
+
+             <div className="iconCart">
+                <a href="#" class="fas fa-shopping-cart"></a>
+            </div>
+
          </header>
 
 

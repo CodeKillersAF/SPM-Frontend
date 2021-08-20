@@ -2,10 +2,11 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Navbar from "./components/navbar/Navbar";
-import HomeBody from './components/homeBody/HomeBody';
 import Footer from "./components/footer/Footer";
 
+import FoodMenu from "./components/foodMenu/FoodMenu";
 
+import Home from "./pages/home/Home";
 
 function App() {
   return (
@@ -13,10 +14,10 @@ function App() {
     <div>
       <Router>
           <Navbar />
-          <HomeBody />
           <section>
             <Switch>
-                {/* <Route path="/" component={HomeBody} exact /> */}
+                <Route path="/" component={Home} exact />
+                <Route path="/menu" component={FoodMenu} />
             </Switch>
           </section>
 
