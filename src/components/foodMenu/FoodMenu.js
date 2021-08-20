@@ -145,10 +145,10 @@ function FoodMenu() {
                         }}
                       >
 
-                  <Fade in={open}>
-                      <div className={classes.paper}>
+                  {/* <Fade in={open}>
+                      <div className={classes.paper}> */}
                         {/* ------------ Rate form starts ------------------- */}
-                        <input type="text" placeholder="Enter Your Name" />
+                        {/* <input type="text" placeholder="Enter Your Name" /> */}
                         {/* <Box component="fieldset" mb={3} borderColor="transparent">
                             <Typography component="legend">Rate Here</Typography>
                             <Rating
@@ -164,18 +164,18 @@ function FoodMenu() {
 
                         {/* --------------- Rate form ends ---------------- */}
 
-                      </div>
-                 </Fade>
+                      {/* </div>
+                 </Fade> */}
 
                   </Modal>
-                {/* ------------------- Modal design ends */}
+                {/* ------------------- Modal design ends ---------------------- */}
                 
             </div>
             <div className="content">
 
                 <h3>{all.foodName}</h3>
                 <p>{all.foodDescription}</p>
-                <a href="#" className="btn">add to cart</a>
+                <button className="btn">add to cart</button>
                 <span className="price">Rs.{all.foodPrice}</span>
             </div>
         </div>
