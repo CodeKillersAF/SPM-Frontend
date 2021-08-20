@@ -3,7 +3,6 @@ import './homeBody.css';
 
 function HomeBody() {
     return (
-        
             <section className="home" id="home">
                 <div className="home-slider">
                     <div className="wrapper">
@@ -27,6 +26,7 @@ function HomeBody() {
                 </div>
 
     </section>
+
     )
 }
 
