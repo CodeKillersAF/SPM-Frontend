@@ -22,6 +22,8 @@ function Navbar() {
                 <a href="#" class="fas fa-shopping-cart"></a>
             </div>
 
+            
+
          </header>
 
 
