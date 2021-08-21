@@ -84,6 +84,15 @@ function FoodMenu() {
       getAllFoods();
     }, []);
 
+    const [cart, setCart] = useState([]);
+
+    const setIds = (id, name) => {
+      cart[0] = id;
+      setCart([id, name, ...cart]);
+      console.log(cart);
+      console.log(name);
+    }
+
     return (
 
     <div>
@@ -175,12 +184,14 @@ function FoodMenu() {
 
                 <h3>{all.foodName}</h3>
                 <p>{all.foodDescription}</p>
-                <button className="btn">add to cart</button>
+                <button className="btn" onClick={() => setIds(all._id, all.foodName)} >add to cart</button>
                 <span className="price">Rs.{all.foodPrice}</span>
             </div>
+
+            <h1></h1>
+
         </div>
   ))} 
-       
 
     </div>
 
