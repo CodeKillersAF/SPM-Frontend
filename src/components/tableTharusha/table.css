@@ -1,0 +1,68 @@
+.table-section .table-box-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(28rem, 1fr));
+    gap:1.5rem;
+}
+
+.table-section .table-box-container .table-box{
+    padding:2.5rem;
+    background:#fff;
+    border-radius: .5rem;
+    border:.1rem solid rgba(0,0,0,.2);
+    box-shadow: var(--box-shadow);
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+}
+
+.table-section .table-box-container .table-box .fa-eye{
+    position: absolute;
+    top:1.5rem;
+    background:#eee;
+    border-radius: 50%;
+    height: 5rem;
+    width:5rem;
+    line-height: 5rem;
+    font-size: 2rem;
+    color:var(--black);
+}
+
+.table-section .table-box-container .table-box  .fa-eye:hover{
+    background: var(--orange);
+    color:#fff;
+}
+
+
+.table-section .table-box-container .table-box .fa-eye{
+    left:-15rem;
+}
+
+.table-section .table-box-container .table-box:hover .fa-eye{
+    left:1.5rem;
+}
+
+.table-section .table-box-container .table-box img{
+    height:17rem;
+    margin:1rem 0;
+}
+
+.table-section .table-box-container .table-box h3{
+    color:var(--black);
+    font-size: 2.5rem;
+}
+
+.table-section .table-box-container .table-box .table-description{
+    padding:1rem 0;
+}
+
+.table-section .table-box-container .table-box .table-description i{
+    font-size: 1.7rem;
+    color:var(--orange);
+}
+
+.table-section .table-box-container .table-box span{
+    color:var(--orange);
+    font-weight: bolder;
+    margin-right: 1rem;
+    font-size: 2.5rem;
+}
