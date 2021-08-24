@@ -111,7 +111,7 @@
 .foodItemDiv{
     display: inline-block;
     margin: 5px 10px;
-    border-color: #fff;
+    border-color: #FFFFFF;
 }
 
 .foodItemDiv .foodItemCategory{
@@ -119,7 +119,7 @@
     font-size: large;
     font-weight: bolder;
     border-style: solid;
-    border-color: #fff;
+    border-color: #FFFFFF;
     padding: 10px 10px;
 }
 
