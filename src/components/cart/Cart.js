@@ -34,8 +34,6 @@ const Cart = (props) =>  {
     const handleClose = () => {
       setOpen(false);
     };
-    var qty = 0
-    // const [count, setCount] = useState(0)
 
     const increaseQty = (id) => {
 
@@ -75,7 +73,7 @@ const Cart = (props) =>  {
                {responses && responses.map(res => (
                  
                    <div>
-                       <p>{res.foodName} - {res.foodPrice}</p>
+                       <p>{res.foodName} - {res.foodPrice} - {res.quantity} - {res.foodPrice * res.quantity}</p>
                        {/* <button onClick={() => increaseQty(res.id)}>+</button>
                        {qty < 0 ? 0 : qty} 
                        <button onClick={}>-</button> */}

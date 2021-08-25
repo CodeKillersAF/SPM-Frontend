@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 
 function FoodMenu() {
 
-
+ 
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -42,16 +42,13 @@ function FoodMenu() {
   };
 
     // popup ends here ---------------------------------------------------------
-
+  	
     const [getAllCategories, setGetallcategories] = useState([]);
 
     //search state
     const [searchTerm, setSearchTerm] = useState('');
     const [displayAllFoods, setDisplayAllFoods] = useState([]);
     const [responses, setResponses] = useState([]);
-
-
-
 
     const getCategoryList = () => {
       axios.get("http://localhost:8000/api/category/all-category")
@@ -77,6 +74,7 @@ function FoodMenu() {
     }
 
     const getCategoryFoods = (id) => {
+      
       axios.get(`http://localhost:8000/api/category/own-category/${id}`)
         .then((response) => {
             console.log(response.data.foodItems);
@@ -94,39 +92,40 @@ function FoodMenu() {
 
     let orderItems = {};
     const getFoodDetails = (id) => {
+     
       axios.get(`http://localhost:8000/api/food/get-food/${id}`)
       .then((response) => {
         console.log('backend response', response.data.data);
-        //let total = total + responses.dat.data.foodPrice
+
         orderItems = {
           id: response.data.data._id,
           foodName: response.data.data.foodName,
           foodPrice: response.data.data.foodPrice,
           category: response.data.data.category,
-          foodDescription: response.data.data.foodDescription   
+          foodDescription: response.data.data.foodDescription,
+          quantity: 1 
         };
         
         let temp = responses;
         let IsAlreadyInCart = false;
         let filteredData;
 
-          filteredData = temp.map(item => {
+        filteredData = temp.map(item => {
+          if(id === item.id){
+            IsAlreadyInCart = true;
+            return {id:item.id,foodName:item.foodName,foodPrice:item.foodPrice + response.data.data.foodPrice,category:item.category,foodDescription:item.foodDescription, quantity:item.quantity}
+          }
+          return item
+        });
 
-            if(id === item.id){
-              IsAlreadyInCart = true
-              // return {id:item.id,foodName:item.foodName,foodPrice:item.foodPrice+response.data.data.foodPrice,category:item.category,foodDescription:item.foodDescription}
-            }
-            console.log('dasdadItem', item);
-            return item
-          });
+        console.log('filtered data', filteredData);
 
         if(!IsAlreadyInCart){
-          //IsAlreadyInCart = false
-          filteredData.push(orderItems)
-          setResponses(filteredData)
-        }else {
-          alert('Item already added to the cart');
+          IsAlreadyInCart = false;
+          filteredData.push(orderItems);
+          setResponses(filteredData);
         }
+
       })
       .catch((error) => {
         console.log(error)
