@@ -97,7 +97,7 @@ function FoodMenu() {
 
     <div>
       <div className="searchFoodItems">
-       <input type="text" className="input-search" placeholder="Search Food Name Or Prices" 
+       <input type="text" className="input-search" placeholder="Search Food Name" 
         onChange={(e) => {setSearchTerm(e.target.value) }}
             />
           </div>
@@ -141,7 +141,7 @@ function FoodMenu() {
                 ></div>
 
                 {/* ------------------ Modal design start ---------------------------- */}
-                    <Modal
+                    {/* <Modal
                         aria-labelledby="transition-modal-title"
                         aria-describedby="transition-modal-description"
                         className={classes.modal}
@@ -152,7 +152,7 @@ function FoodMenu() {
                         BackdropProps={{
                           timeout: 500,
                         }}
-                      >
+                      > */}
 
                   {/* <Fade in={open}>
                       <div className={classes.paper}> */}
@@ -176,7 +176,7 @@ function FoodMenu() {
                       {/* </div>
                  </Fade> */}
 
-                  </Modal>
+                  {/* </Modal> */}
                 {/* ------------------- Modal design ends ---------------------- */}
                 
             </div>
