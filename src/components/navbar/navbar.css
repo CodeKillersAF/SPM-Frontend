@@ -34,7 +34,7 @@ header .navbar a:hover{
     background: var(--orange);
 }
 
-header .iconCart a{
+/* header .iconCart a{
     cursor: pointer;
     margin-left: .5rem;
     height:4.5rem;
@@ -51,7 +51,7 @@ header .iconCart a:hover{
     color:#fff;
     background: var(--orange);
     transform: rotate(360deg);
-}
+} */
 
 @media screen and (max-width: 600px) {
     

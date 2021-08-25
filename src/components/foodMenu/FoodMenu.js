@@ -6,11 +6,11 @@ import { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
-//import Fade from '@material-ui/core/Fade';
-
+import Fade from '@material-ui/core/Fade';
+import Navbar from '../navbar/Navbar';
 // import Rating from '@material-ui/lab/Rating';
-// import Typography from '@material-ui/core/Typography';
-// import Box from '@material-ui/core/Box';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -29,6 +29,7 @@ const useStyles = makeStyles((theme) => ({
 
 function FoodMenu() {
 
+
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -41,13 +42,15 @@ function FoodMenu() {
   };
 
     // popup ends here ---------------------------------------------------------
-    
+
     const [getAllCategories, setGetallcategories] = useState([]);
 
     //search state
     const [searchTerm, setSearchTerm] = useState('');
-
     const [displayAllFoods, setDisplayAllFoods] = useState([]);
+    const [responses, setResponses] = useState([]);
+
+
 
 
     const getCategoryList = () => {
@@ -55,6 +58,7 @@ function FoodMenu() {
         .then((response) => {
           console.log(response.data.data);
           setGetallcategories(response.data.data);
+         
         })
         .catch((error) => {
           console.log(error);
@@ -66,6 +70,9 @@ function FoodMenu() {
         .then((response) => {
           console.log(response.data.data);
           setDisplayAllFoods(response.data.data);
+        })
+        .catch((error) => {
+          console.log(error);
         })
     }
 
@@ -85,17 +92,75 @@ function FoodMenu() {
       getAllFoods();
     }, []);
 
-    return (
+    let orderItems = {};
+    const getFoodDetails = (id) => {
+      axios.get(`http://localhost:8000/api/food/get-food/${id}`)
+      .then((response) => {
+        console.log('backend response', response.data.data);
+        //let total = total + responses.dat.data.foodPrice
+        orderItems = {
+          id: response.data.data._id,
+          foodName: response.data.data.foodName,
+          foodPrice: response.data.data.foodPrice,
+          category: response.data.data.category,
+          foodDescription: response.data.data.foodDescription   
+        };
+        
+        let temp = responses;
+        let IsAlreadyInCart = false;
+        let filteredData;
 
+          filteredData = temp.map(item => {
+
+            if(id === item.id){
+              IsAlreadyInCart = true
+              // return {id:item.id,foodName:item.foodName,foodPrice:item.foodPrice+response.data.data.foodPrice,category:item.category,foodDescription:item.foodDescription}
+            }
+            console.log('dasdadItem', item);
+            return item
+          });
+
+        if(!IsAlreadyInCart){
+          //IsAlreadyInCart = false
+          filteredData.push(orderItems)
+          setResponses(filteredData)
+        }else {
+          alert('Item already added to the cart');
+        }
+      })
+      .catch((error) => {
+        console.log(error)
+      });
+
+    }
+
+
+    // const testHanldeOpen = () => {
+    //   handleOpen()
+    // }
+
+    return (
+    
     <div>
       <div className="searchFoodItems">
        <input type="text" className="input-search" placeholder="Search Food Name Or Prices" 
         onChange={(e) => {setSearchTerm(e.target.value) }}
             />
           </div>
+          <div>
+        {console.log('Palleha', responses)}
+        <Navbar responses={responses}></Navbar>
+      </div>
+      
 
-
-            <div className="foodItemCenter">
+        <div className="foodItemCenter">
+          {/* {console.log('all_cat', getAllCategories)}
+          {responses.map((res) => (
+            <div>
+               <p>{res.name}</p>
+            </div>
+           
+          ))} */}
           {getAllCategories.map((ac) => (
              <div className="foodItemDiv">
                   <button className="foodItemCategory" onClick={() => getCategoryFoods(ac._id)}>
@@ -129,7 +194,7 @@ function FoodMenu() {
             <div className="image">
                 <img src={all.url} alt="dbUrl" width="10px  " />
                 <div className="fa fa-star"
-                  onClick={handleOpen}
+                  
                 ></div>
 
                 {/* ------------------ Modal design start ---------------------------- */}
@@ -146,27 +211,11 @@ function FoodMenu() {
                         }}
                       >
 
-                  {/* <Fade in={open}>
-                      <div className={classes.paper}> */}
+                  <Fade in={open}>
+                      <div className={classes.paper}>
                         {/* ------------ Rate form starts ------------------- */}
-                        {/* <input type="text" placeholder="Enter Your Name" /> */}
-                        {/* <Box component="fieldset" mb={3} borderColor="transparent">
-                            <Typography component="legend">Rate Here</Typography>
-                            <Rating
-                            name="simple-controlled"
-                            value={value}
-                            onChange={(e, newValue) => {
-                                setValue(newValue);
-                            }}
-                        />
-
-                        <h3>{value}</h3>
-                        </Box> */}
-
-                        {/* --------------- Rate form ends ---------------- */}
-
-                      {/* </div>
-                 </Fade> */}
+                      </div>
+                 </Fade>
 
                   </Modal>
                 {/* ------------------- Modal design ends ---------------------- */}
@@ -176,12 +225,13 @@ function FoodMenu() {
 
                 <h3>{all.foodName}</h3>
                 <p>{all.foodDescription}</p>
-                <button className="btn">add to cart</button>
+                <button className="btn" onClick={() => getFoodDetails(all._id)}>add to cart</button>
                 <span className="price">Rs.{all.foodPrice}</span>
             </div>
+
         </div>
   ))} 
- 
+    {/* <button onClick={getOnlyUniqueItems}>only unique</button> */}
 
     </div>
 </section>
