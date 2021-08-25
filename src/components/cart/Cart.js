@@ -74,8 +74,9 @@ const Cart = (props) =>  {
                 
                {responses && responses.map(res => (
                  
-                   <div>
-                       <p>{res.foodName} - {res.foodPrice}</p>
+                   <div className="cart-Item">
+                       <h1>{res.foodName} </h1> 
+                       <h3>Rs.{res.foodPrice}</h3>
                        {/* <button onClick={() => increaseQty(res.id)}>+</button>
                        {qty < 0 ? 0 : qty} 
                        <button onClick={}>-</button> */}

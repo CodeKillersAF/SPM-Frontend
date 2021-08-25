@@ -5,6 +5,8 @@ import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import Select from "react-select";
 import axios from "axios";
+import TextField from '@material-ui/core/TextField';
+import './orderForm.css';
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -17,6 +19,12 @@ const useStyles = makeStyles((theme) => ({
     border: "2px solid #000",
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
+  },
+  root: {
+    '& > *': {
+      margin: theme.spacing(1),
+      width: '50ch',
+    },
   },
 }));
 
@@ -134,8 +142,8 @@ export default function OrderForm(props) {
 
   return (
     <div>
-      <button type="button" onClick={handleOpen}>
-        react-transition-group
+      <button className="orderNow-button" type="button" onClick={handleOpen}>
+        Order Now
       </button>
 
       
@@ -154,47 +162,84 @@ export default function OrderForm(props) {
         <Fade in={open}>
           <div className={classes.paper}>
             {/* ------------ Rate form starts ------------------- */}
-            <center>
+            <div className="orderForm">
               <h2>Order</h2>
-            </center>
-            <form onSubmit={sendOrder}>
-              <div>
-                <input
-                  type="text"
-                  placeholder="First Name"
+            <form className={classes.root} onSubmit={sendOrder}>
+                <TextField
+                  id="outlined-basic"
+                  label="First Name"
+                  variant="outlined"
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
                 />
                 <br />
+                {/* <input
+                  type="text"
+                  className="form__input"
+                  placeholder="First Name"
+                  
+                /> */}
+
+              <TextField
+                  id="outlined-basic"
+                  label="Last Name"
+                  variant="outlined"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                />
+{/* 
                 <input
                   type="text"
                   placeholder="Last Name"
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
-                />
+                /> */}
                 <br />
-                <input
+
+                <TextField
+                  className="textFieldDesign"
+                  id="outlined-basic"
+                  label="Email"
+                  variant="outlined"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+
+                {/* <input
                   type="text"
                   placeholder="Email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                />
+                /> */}
                 <br />
-                <input
+
+                <TextField
+                  id="outlined-basic"
+                  label="Telephone"
+                  variant="outlined"
+                  value={telephone}
+                  onChange={(e) => setTelephone(e.target.value)}
+                />
+
+                {/* <input
                   type="text"
                   placeholder="Telephone"
                   value={telephone}
                   onChange={(e) => setTelephone(e.target.value)}
-                />
+                /> */}
                 <br />
                 <Select options={options} onChange={selectType} />
 
-                <button>Order</button>
-                <button disabled={disableTrigger} onClick={deleteOrder}>
+          <div className="button-order">
+            <button className="order-button">Order</button>
+                <button className={disableTrigger?"order-delete disabled":"order-delete"} disabled={disableTrigger} onClick={deleteOrder}>
                   Delete Order
                 </button>
-              </div>
+          </div>
+
             </form>
+
+          </div>
 
             {/* --------------- Rate form ends ---------------- */}
           </div>
