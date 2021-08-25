@@ -1,12 +1,13 @@
 import React from 'react';
 import './navbar.css';
 import { Link } from 'react-router-dom';
+import Cart from '../cart/Cart';
+function Navbar(props) {
 
-function Navbar() {
+    const {responses , total} = props
 
     return (
         <header>
-          
             <a href="#" className="logo"><i class="fas fa-utensils"></i>SPM</a> 
               <div className="navbar" id="myTopnav">
            
@@ -16,18 +17,10 @@ function Navbar() {
                  <Link to="/menu">Menu</Link>  
                  <Link to="/review">Review</Link>  
                  <Link to="/order">Order</Link>  
+                 
              </div>
-
-             <div className="iconCart">
-                <a href="#" class="fas fa-shopping-cart"></a>
-            </div>
-
-            
-
+                <Cart responses = {responses} total = {total} ></Cart>
          </header>
-
-
-
     )
 }
 
