@@ -16,3 +16,22 @@ header .iconCart a:hover{
     background: var(--orange);
     transform: rotate(360deg);
 }
+
+.cart-Item{
+    background: #fff;
+    padding: 10px 40px;
+    width: 100%;
+}
+
+
+.cart-Item h1{
+    font-size: 20px;
+    color: var(--black);
+    font-weight: bold;
+}
+
+.cart-Item h3{
+    font-size: 15px;
+    color: var(--orange);
+    font-weight: 500;
+}
