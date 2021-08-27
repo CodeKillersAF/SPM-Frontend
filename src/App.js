@@ -7,6 +7,7 @@ import Footer from "./components/footer/Footer";
 import FoodMenu from "./components/foodMenu/FoodMenu";
 
 import Home from "./pages/home/Home";
+import Table from "./pages/table/Table";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Switch>
                 <Route path="/" component={Home} exact />
                 <Route path="/menu" component={FoodMenu} />
+                <Route path="/table" component={Table} />
             </Switch>
           </section>
 
