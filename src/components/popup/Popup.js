@@ -7,6 +7,9 @@ import Fade from '@material-ui/core/Fade';
 import Rating from '@material-ui/lab/Rating';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import TextField from '@material-ui/core/TextField';
+
+import './popup.css';
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -18,7 +21,13 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     border: '2px solid #000',
     boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
+    padding: theme.spacing(5, 7, 5),
+  },
+  root: {
+    '& > *': {
+      margin: theme.spacing(1),
+      width: '50ch',
+    },
   },
 }));
 
@@ -27,39 +36,65 @@ function Popup({ open, onClose }) {
 
   const classes = useStyles();
 
+  const [value, setValue] = React.useState(0);
+
   return (
     <div>
       
             <Modal
-                        aria-labelledby="transition-modal-title"
-                        aria-describedby="transition-modal-description"
-                        className={classes.modal}
-                        open={open}
-                        onClose={onClose}
-                        closeAfterTransition
-                        BackdropComponent={Backdrop}
-                        BackdropProps={{
-                          timeout: 500,
-                        }}
-                      >
+                aria-labelledby="transition-modal-title"
+                aria-describedby="transition-modal-description"
+                className={classes.modal}
+                open={open}
+                onClose={onClose}
+                closeAfterTransition
+                BackdropComponent={Backdrop}
+                BackdropProps={{
+                    timeout: 500,
+                }}
+             >
 
                   <Fade in={open}>
                       <div className={classes.paper}>
-    
-                        <input type="text" placeholder="Enter Your Name" />
-                        <Box component="fieldset" mb={3} borderColor="transparent">
-                            <Typography component="legend">Rate Here</Typography>
-                            <Rating
-                            name="simple-controlled"
-                            // value={value}
-                            // onChange={(e, newValue) => {
-                            //     setValue(newValue);
-                            // }}
-                        />
 
-                        {/* <h3>{value}</h3> */}
-                        </Box>
+                      <h3 className="sub-heading" style={{ marginBottom: "30px" }}> Rate Our Food </h3>
+                
+                      <form className={classes.root} noValidate autoComplete="off">
 
+                            <TextField 
+                                id="outlined-basic" 
+                                label="Your Name" 
+                                variant="outlined" 
+                            />
+                            <br />
+                            <TextField
+                              id="filled-multiline-static"
+                              label="About Food"
+                              multiline
+                              rows={4}
+                              variant="outlined"
+                            />
+                            <br />
+
+                        <center>
+                            <Box component="fieldset" mb={3} borderColor="transparent">
+                              {/* <Typography component="legend">Start Rate</Typography> */}
+                              <Rating
+                                name="size-large"
+                                value={value}
+                                onChange={(event, newValue) => {
+                                  setValue(newValue);
+                                }}
+                                size="large"
+                              />
+                            </Box>
+                        </center>
+
+                            <center>
+                                 <button className="rateBtn">Rate</button>
+                          </center>
+
+                      </form>
 
                       </div>
                  </Fade>

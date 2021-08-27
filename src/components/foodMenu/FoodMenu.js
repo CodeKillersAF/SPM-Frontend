@@ -75,7 +75,7 @@ function FoodMenu() {
 
     <div>
 
-        <Popup open={handleOpen} onClose={handleClose} />
+        <Popup open={open} onClose={handleClose} />
 
       <div className="searchFoodItems">
        <input type="text" className="input-search" placeholder="Search Food Name Or Prices" 
@@ -118,7 +118,7 @@ function FoodMenu() {
             <div className="image">
                 <img src={all.url} alt="dbUrl" />
                 <div className="fa fa-star"
-                  onClick={open}
+                  onClick={handleOpen}
                 ></div>
                 
             </div>
