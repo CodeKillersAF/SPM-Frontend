@@ -75,7 +75,7 @@ function FoodMenu() {
 
     <div>
 
-        <Popup open={handleOpen} />
+        <Popup open={handleOpen} onClose={handleClose} />
 
       <div className="searchFoodItems">
        <input type="text" className="input-search" placeholder="Search Food Name Or Prices" 

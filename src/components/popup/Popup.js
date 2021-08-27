@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-function Popup({ open }) {
+function Popup({ open, onClose }) {
 
   const classes = useStyles();
 
@@ -35,7 +35,7 @@ function Popup({ open }) {
                         aria-describedby="transition-modal-description"
                         className={classes.modal}
                         open={open}
-                        onClose={handleClose}
+                        onClose={onClose}
                         closeAfterTransition
                         BackdropComponent={Backdrop}
                         BackdropProps={{
@@ -51,13 +51,13 @@ function Popup({ open }) {
                             <Typography component="legend">Rate Here</Typography>
                             <Rating
                             name="simple-controlled"
-                            value={value}
-                            onChange={(e, newValue) => {
-                                setValue(newValue);
-                            }}
+                            // value={value}
+                            // onChange={(e, newValue) => {
+                            //     setValue(newValue);
+                            // }}
                         />
 
-                        <h3>{value}</h3>
+                        {/* <h3>{value}</h3> */}
                         </Box>
 
 
