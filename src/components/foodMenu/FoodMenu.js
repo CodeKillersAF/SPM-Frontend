@@ -14,6 +14,12 @@ function FoodMenu() {
     setOpen(true);
   };
 
+
+  const rateFoodId = (id) => {
+    handleOpen();
+    console.log(id);
+  }
+
   const handleClose = () => {
     setOpen(false);
   };
@@ -118,7 +124,7 @@ function FoodMenu() {
             <div className="image">
                 <img src={all.url} alt="dbUrl" />
                 <div className="fa fa-star"
-                  onClick={handleOpen}
+                  onClick={() => rateFoodId(all._id)}
                 ></div>
                 
             </div>

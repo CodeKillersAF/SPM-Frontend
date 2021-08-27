@@ -32,9 +32,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-function Popup({ open, onClose }) {
+function Popup({ open, onClose, rateId }) {
 
   const classes = useStyles();
+
 
   const [value, setValue] = React.useState(0);
 
