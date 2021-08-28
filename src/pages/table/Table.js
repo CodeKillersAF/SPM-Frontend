@@ -3,12 +3,14 @@ import "./table.css";
 import Popup from "../../components/popup/Popup";
 import axios from "axios";
 import TableItem from "../../components/tableItem/TableItem";
+import PopupWindow from "../../components/popupWindow/PopupWindow";
+import BookTableForm from "../../components/bookTableForm/BookTableForm";
 
 function Table() {
   const [selectedCategory, setSelectedCategory] = useState({
     tables: [],
-    name:"",
-    description:"",
+    name: "",
+    description: "",
   });
   useEffect(() => {
     //get all table categories
@@ -73,14 +75,14 @@ function Table() {
     },
   ]);
 
-  const onCategorySelete = (category) => {
-    setSelectedCategory(category);
-    console.log(category);
-  };
+  const [formOpen, setFormOpen] = useState(false);
 
+  const onClickFormOpen = () => {
+    setFormOpen(true);
+  };
   return (
     <div>
-      <Popup open={open} onClose={handleClose} />
+      <PopupWindow openPopup={formOpen} titem ="Book Table" form={BookTableForm} />
 
       <div className="table-container">
         <h3 className="tableheading"> our tables </h3>
@@ -90,7 +92,7 @@ function Table() {
             {category.map((c) => (
               <button
                 className="table-category-button"
-                onClick={() => onCategorySelete(c)}
+                onClick={() => onClickFormOpen(c)}
               >
                 {c.name}
               </button>
