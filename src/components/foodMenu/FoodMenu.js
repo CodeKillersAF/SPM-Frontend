@@ -15,10 +15,10 @@ function FoodMenu() {
   };
 
 
-  const rateFoodId = (id) => {
-    handleOpen();
-    console.log(id);
-  }
+  // const rateFoodId = (id) => {
+  //   handleOpen();
+  //   console.log(id);
+  // }
 
   const handleClose = () => {
     setOpen(false);
@@ -77,11 +77,34 @@ function FoodMenu() {
       console.log(name);
     }
 
+    // const [FoodId, setFoodId] = useState('');
+
+    // const getFoodIdRate = (id) => {
+    //     // handleOpen();
+    //      setFoodId(id);
+    // }
+
+    const [foodName, setFoodName] = useState('');
+    const [foodId, setFoodId] = useState('');
+
+    const getFoodForStar = (id) => {
+        axios.get(`http://localhost:8000/api/food/one-food/${id}`)
+        .then((response) => {
+          console.log(response.data.data);
+          setFoodName(response.data.data.foodName);
+          setFoodId(response.data.data._id);
+          handleOpen();
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+    }
+
     return (
 
     <div>
 
-        <Popup open={open} onClose={handleClose} />
+        <Popup open={open} onClose={handleClose} foodname={foodName} foodid={foodId} />
 
       <div className="searchFoodItems">
        <input type="text" className="input-search" placeholder="Search Food Name Or Prices" 
@@ -124,7 +147,7 @@ function FoodMenu() {
             <div className="image">
                 <img src={all.url} alt="dbUrl" />
                 <div className="fa fa-star"
-                  onClick={() => rateFoodId(all._id)}
+                  onClick={() => getFoodForStar(all._id)}
                 ></div>
                 
             </div>

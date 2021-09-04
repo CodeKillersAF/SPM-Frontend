@@ -1,15 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 
 import Rating from '@material-ui/lab/Rating';
-import Typography from '@material-ui/core/Typography';
+// import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import TextField from '@material-ui/core/TextField';
 
 import './popup.css';
+import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -32,12 +34,50 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-function Popup({ open, onClose, rateId }) {
+function Popup({ open, onClose, foodname, foodid  }) {
 
   const classes = useStyles();
 
+  const history = useHistory();
+  // console.log(foodname, foodid);
 
+  const [customerName, setCustomerName] = useState('');
+  const [aboutFood, setaboutFood] = useState('');
   const [value, setValue] = React.useState(0);
+
+  const addRateForFood = (e) => {
+    e.preventDefault();
+
+    let ratingData = {
+      customerName: customerName,
+      aboutFood: aboutFood,
+      starRate: value
+    }
+
+    axios.post("http://localhost:8000/api/rate/add-rate", ratingData)
+      .then((response) => {
+        // console.log(response.data.data);
+
+        const RateId = response.data.data._id;
+
+        let rate = {
+          rate: [RateId]
+        }
+
+        axios.put(`http://localhost:8000/api/food/update-rate/${foodid}`, rate)
+          .then((response) => {
+            // console.log(response.data.data);
+            console.log('updated');
+            history.push('/menu');
+          })
+          .catch((error) => {
+            console.log(error);
+          })
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  }
 
   return (
     <div>
@@ -58,7 +98,7 @@ function Popup({ open, onClose, rateId }) {
                   <Fade in={open}>
                       <div className={classes.paper}>
 
-                      <h3 className="sub-heading" style={{ marginBottom: "30px" }}> Rate Our Food </h3>
+                      <h3 className="sub-heading" style={{ marginBottom: "30px" }}> Rate For {foodname}</h3>
                 
                       <form className={classes.root} noValidate autoComplete="off">
 
@@ -66,6 +106,8 @@ function Popup({ open, onClose, rateId }) {
                                 id="outlined-basic" 
                                 label="Your Name" 
                                 variant="outlined" 
+                                value={customerName}
+                                onChange={(e) => setCustomerName(e.target.value)}
                             />
                             <br />
                             <TextField
@@ -74,6 +116,8 @@ function Popup({ open, onClose, rateId }) {
                               multiline
                               rows={4}
                               variant="outlined"
+                              value={aboutFood}
+                              onChange={(e) => setaboutFood(e.target.value)}
                             />
                             <br />
 
@@ -92,7 +136,7 @@ function Popup({ open, onClose, rateId }) {
                         </center>
 
                             <center>
-                                 <button className="rateBtn">Rate</button>
+                                 <button onClick={addRateForFood} className="rateBtn">Rate</button>
                           </center>
 
                       </form>
