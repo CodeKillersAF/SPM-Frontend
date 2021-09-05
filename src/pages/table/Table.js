@@ -75,14 +75,14 @@ function Table() {
     },
   ]);
 
-  const [formOpen, setFormOpen] = useState(false);
+  const [formOpen, setFormOpen] = useState(true);
 
   const onClickFormOpen = () => {
     setFormOpen(true);
   };
   return (
     <div>
-      <PopupWindow openPopup={formOpen} titem ="Book Table" form={BookTableForm} />
+      <PopupWindow openPopup={formOpen} title ="Book Table" form={<BookTableForm/>} />
 
       <div className="table-container">
         <h3 className="tableheading"> our tables </h3>
