@@ -1,19 +1,16 @@
 import React, { useState } from "react";
+import DateFnsUtils from "@date-io/date-fns";
 import {
-  Grid,
-  TextField,
-  makeStyles,
-  FormControl,
-  InputLabel,
-  Select as MuiSelect,
-  MenuItem,
-  Button,
-} from "@material-ui/core";
+  MuiPickersUtilsProvider,
+  KeyboardTimePicker,
+  KeyboardDatePicker,
+} from "@material-ui/pickers";
+import { Grid, TextField, makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     "& .MuiFormControl-root": {
-      width: "90%",
+      width: "95%",
       margin: theme.spacing(2),
     },
     backdrop: {
@@ -24,56 +21,37 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function BookTableForm() {
-    const classes = useStyles();
+  const classes = useStyles();
   return (
     <div>
       <form className={classes.root}>
         <Grid container>
-          <Grid item xs={6}>
+          <Grid item xs={12}>
+            <TextField variant="outlined" name="name" label="Name" />
+            <TextField variant="outlined" name="email" label="Email" />
             <TextField
               variant="outlined"
-              name="name"
-              label="Name"
-              required={true}
+              name="phoneNumber"
+              label="Phone number"
             />
-            <TextField
-              variant="outlined"
-              name="width"
-              label="Width"
-              required={true}
-            />
-            <TextField
-              variant="outlined"
-              name="height"
-              label="Height"
-              required={true}
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <FormControl variant="outlined">
-              <InputLabel>Category</InputLabel>
-              <MuiSelect name="category" label="Category" required={true}>
-                <MenuItem value="">None</MenuItem>
-              </MuiSelect>
-            </FormControl>
-            <TextField
-              variant="outlined"
-              name="chairs"
-              label="Chairs"
-              required={true}
-            />
-            <TextField
-              id="outlined-textarea"
-              label="Description"
-              placeholder="Description"
-              multiline
-              variant="outlined"
-              maxRows={10}
-              minRows={10}
-              name="description"
-              required={true}
-            />
-          
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+              <KeyboardDatePicker
+                id="time-picker"
+                label="Date"
+                KeyboardButtonProps={{
+                  "aria-label": "change time",
+                }}
+                inputVariant="outlined"
+              />
+              <KeyboardTimePicker
+                id="time-picker"
+                label="Time"
+                KeyboardButtonProps={{
+                  "aria-label": "change time",
+                }}
+                inputVariant="outlined"
+              />
+            </MuiPickersUtilsProvider>
           </Grid>
         </Grid>
       </form>
