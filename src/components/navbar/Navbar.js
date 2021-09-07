@@ -14,7 +14,7 @@ function Navbar() {
                  <Link to="/table">Table</Link>  
                  <Link to="/about">About</Link>  
                  <Link to="/menu">Menu</Link>  
-                 <Link to="/review">Review</Link>  
+                 <Link to="/offer">Review</Link>  
                  <Link to="/order">Order</Link>  
              </div>
 
