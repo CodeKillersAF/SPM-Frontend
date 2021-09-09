@@ -3,59 +3,41 @@ import './foodmenu.css';
 import { useState } from 'react';
 import axios from 'axios';
 import { useEffect } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Modal from '@material-ui/core/Modal';
-import Backdrop from '@material-ui/core/Backdrop';
-import Fade from '@material-ui/core/Fade';
-import Navbar from '../navbar/Navbar';
-// import Rating from '@material-ui/lab/Rating';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
 
-const useStyles = makeStyles((theme) => ({
-  modal: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  paper: {
-    backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
-  },
-}));
-
+import Popup from '../popup/Popup';
 
 function FoodMenu() {
 
- 
-  const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => {
     setOpen(true);
   };
 
+
+  // const rateFoodId = (id) => {
+  //   handleOpen();
+  //   console.log(id);
+  // }
+
   const handleClose = () => {
     setOpen(false);
   };
 
     // popup ends here ---------------------------------------------------------
-  	
+    
     const [getAllCategories, setGetallcategories] = useState([]);
 
     //search state
     const [searchTerm, setSearchTerm] = useState('');
+
     const [displayAllFoods, setDisplayAllFoods] = useState([]);
-    const [responses, setResponses] = useState([]);
 
     const getCategoryList = () => {
       axios.get("http://localhost:8000/api/category/all-category")
         .then((response) => {
           console.log(response.data.data);
           setGetallcategories(response.data.data);
-         
         })
         .catch((error) => {
           console.log(error);
@@ -68,13 +50,9 @@ function FoodMenu() {
           console.log(response.data.data);
           setDisplayAllFoods(response.data.data);
         })
-        .catch((error) => {
-          console.log(error);
-        })
     }
 
     const getCategoryFoods = (id) => {
-      
       axios.get(`http://localhost:8000/api/category/own-category/${id}`)
         .then((response) => {
             console.log(response.data.foodItems);
@@ -90,79 +68,52 @@ function FoodMenu() {
       getAllFoods();
     }, []);
 
-    let orderItems = {};
-    const getFoodDetails = (id) => {
-     
-      axios.get(`http://localhost:8000/api/food/get-food/${id}`)
-      .then((response) => {
-        console.log('backend response', response.data.data);
+    const [cart, setCart] = useState([]);
 
-        orderItems = {
-          id: response.data.data._id,
-          foodName: response.data.data.foodName,
-          foodPrice: response.data.data.foodPrice,
-          category: response.data.data.category,
-          foodDescription: response.data.data.foodDescription,
-          quantity: 1 
-        };
-        
-        let temp = responses;
-        let IsAlreadyInCart = false;
-        let filteredData;
-
-        filteredData = temp.map(item => {
-          if(id === item.id){
-            IsAlreadyInCart = true;
-            return {id:item.id,foodName:item.foodName,foodPrice:item.foodPrice + response.data.data.foodPrice,category:item.category,foodDescription:item.foodDescription, quantity:item.quantity}
-          }
-          return item
-        });
-
-        console.log('filtered data', filteredData);
-
-        if(!IsAlreadyInCart){
-          IsAlreadyInCart = false;
-          filteredData.push(orderItems);
-          setResponses(filteredData);
-          alert('Item added to the cart');
-        } else {
-          alert('Item added to the cart');
-        }
-
-      })
-      .catch((error) => {
-        console.log(error)
-      });
-
+    const setIds = (id, name) => {
+      cart[0] = id;
+      setCart([id, name, ...cart]);
+      console.log(cart);
+      console.log(name);
     }
 
+    // const [FoodId, setFoodId] = useState('');
 
-    // const testHanldeOpen = () => {
-    //   handleOpen()
+    // const getFoodIdRate = (id) => {
+    //     // handleOpen();
+    //      setFoodId(id);
     // }
 
+    const [foodName, setFoodName] = useState('');
+    const [foodId, setFoodId] = useState('');
+
+    const getFoodForStar = (id) => {
+        axios.get(`http://localhost:8000/api/food/one-food/${id}`)
+        .then((response) => {
+          console.log(response.data.data);
+          setFoodName(response.data.data.foodName);
+          setFoodId(response.data.data._id);
+          handleOpen();
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+    }
+
     return (
-    
+
     <div>
+
+        <Popup open={open} onClose={handleClose} foodname={foodName} foodid={foodId} />
+
       <div className="searchFoodItems">
-       <input type="text" className="input-search" placeholder="Search Food Name" 
+       <input type="text" className="input-search" placeholder="Search Food Name Or Prices" 
         onChange={(e) => {setSearchTerm(e.target.value) }}
             />
           </div>
-          <div>
-        {console.log('Palleha', responses)}
-        <Navbar responses={responses}></Navbar>
-      </div>
-      
 
-        <div className="foodItemCenter">
-          {/* {console.log('all_cat', getAllCategories)}
-          {responses.map((res) => (
-            <div>
-               <p>{res.name}</p>
-            </div>
-           
-          ))} */}
+
+            <div className="foodItemCenter">
           {getAllCategories.map((ac) => (
              <div className="foodItemDiv">
                   <button className="foodItemCategory" onClick={() => getCategoryFoods(ac._id)}>
@@ -179,7 +130,7 @@ function FoodMenu() {
 
     <div className="box-container">
 
-      {displayAllFoods.filter( (val) => {
+      {displayAllFoods.filter( val => {
         if(searchTerm === '') {
           return val;
         }
@@ -194,52 +145,30 @@ function FoodMenu() {
       }).map((all) => ( 
         <div className="box">
             <div className="image">
-                <img src={all.url} alt="dbUrl" width="10px  " />
+                <img src={all.url} alt="dbUrl" />
                 <div className="fa fa-star"
-                  
+                  onClick={() => getFoodForStar(all._id)}
                 ></div>
-
-                {/* ------------------ Modal design start ---------------------------- */}
-                    {/* <Modal
-                        aria-labelledby="transition-modal-title"
-                        aria-describedby="transition-modal-description"
-                        className={classes.modal}
-                        open={open}
-                        onClose={handleClose}
-                        closeAfterTransition
-                        BackdropComponent={Backdrop}
-                        BackdropProps={{
-                          timeout: 500,
-                        }}
-                      > */}
-
-                  <Fade in={open}>
-                      <div className={classes.paper}>
-                        {/* ------------ Rate form starts ------------------- */}
-                      </div>
-                 </Fade>
-
-                  {/* </Modal> */}
-                {/* ------------------- Modal design ends ---------------------- */}
                 
             </div>
             <div className="content">
 
                 <h3>{all.foodName}</h3>
                 <p>{all.foodDescription}</p>
-                <button className="btn" onClick={() => getFoodDetails(all._id)}>add to cart</button>
+                <button className="btn" onClick={() => setIds(all._id, all.foodName)} >add to cart</button>
                 <span className="price">Rs.{all.foodPrice}</span>
             </div>
 
+            <h1></h1>
+
         </div>
   ))} 
-    {/* <button onClick={getOnlyUniqueItems}>only unique</button> */}
 
     </div>
-</section>
 
+</section>
 </div>
-)
+    )
 }
 
 export default FoodMenu
