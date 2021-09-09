@@ -171,6 +171,7 @@ export default function OrderForm(props) {
                   variant="outlined"
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
+                  required={true}
                 />
                 <br />
                 {/* <input
@@ -186,6 +187,7 @@ export default function OrderForm(props) {
                   variant="outlined"
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
+                  required={true}
                 />
 {/* 
                 <input
@@ -203,6 +205,7 @@ export default function OrderForm(props) {
                   variant="outlined"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  required={true}
                 />
 
                 {/* <input
@@ -219,6 +222,7 @@ export default function OrderForm(props) {
                   variant="outlined"
                   value={telephone}
                   onChange={(e) => setTelephone(e.target.value)}
+                  required={true}
                 />
 
                 {/* <input

@@ -22,8 +22,9 @@ const useStyles = makeStyles((theme) => ({
 
 
 const Cart = (props) =>  {
+    var qty = 1;
     const {responses } = props;
-
+    // const [qty, setQty] = useState();
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
   
@@ -35,14 +36,25 @@ const Cart = (props) =>  {
       setOpen(false);
     };
 
-    const increaseQty = (id) => {
+    // const increaseQty = (id,price) => {
+    //   console.log('price',price);
+    //   console.log('id',id);
+    //   if (id === '61200063f7c4ca2f1c370524'){
+    //     price = price * qty;
+    //     qty = qty + 1;
+    //     console.log(price);
+    //   }
+    //   else if (id === '6120b62c15290b40c004e296'){
+    //     price = price * qty;
+    //     qty = qty + 1;
+    //     console.log(price);
+    //   }
+    // }
 
-    }
+    // const decreaseQty = (id) => {
 
-    const decreaseQty = (id) => {
-
-    }
-
+    // }
+    //console.log( res.foodPrice * (qty = qty + 1 )
     return (
         
         <div>
@@ -75,9 +87,7 @@ const Cart = (props) =>  {
                    <div className="cart-Item">
                        <h1>{res.foodName} </h1> 
                        <h3>Rs.{res.foodPrice}</h3>
-                       {/* <button onClick={() => increaseQty(res.id)}>+</button>
-                       {qty < 0 ? 0 : qty} 
-                       <button onClick={}>-</button> */}
+                       {/* <button onClick = {() => increaseQty(res.id,res.foodPrice)}>+</button> */}
                    </div>
                   
                ))}

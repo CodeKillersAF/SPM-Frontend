@@ -124,6 +124,9 @@ function FoodMenu() {
           IsAlreadyInCart = false;
           filteredData.push(orderItems);
           setResponses(filteredData);
+          alert('Item added to the cart');
+        } else {
+          alert('Item added to the cart');
         }
 
       })
