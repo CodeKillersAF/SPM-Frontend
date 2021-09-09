@@ -1,0 +1,15 @@
+.rateBtn{
+    margin-top: 1rem;
+    font-size: 1.7rem;
+    color:#fff;
+    background: var(--black);
+    border-radius: .5rem;
+    cursor: pointer;
+    padding:.5rem 3rem;
+    width: 50%;
+}
+
+.rateBtn:hover{
+    background: var(--orange);
+    letter-spacing: .1rem;
+}

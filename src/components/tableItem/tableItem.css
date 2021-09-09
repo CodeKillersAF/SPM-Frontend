@@ -1,0 +1,25 @@
+.tableCard:hover{
+    transform: scale(1.05);
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 9);
+}
+
+.table-container .search-table{
+    border: 2px solid;
+    border-color: var(--black);
+    padding: 7px 15px;
+    width: 40%;
+    border-radius: 10px;
+}
+
+@media screen and (max-width: 600px) {
+    .table{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .tableCard{
+        transition: 0.5 ease;
+        cursor: pointer;
+        width: 300px;
+    }
+}
