@@ -8,6 +8,7 @@ import FoodMenu from "./components/foodMenu/FoodMenu";
 
 import Home from "./pages/home/Home";
 import Table from "./pages/table/Table";
+import Promotion from "./pages/promotion/Promotion";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
                 <Route path="/" component={Home} exact />
                 <Route path="/menu" component={FoodMenu} />
                 <Route path="/table" component={Table} />
+                <Route path="/offer" component={Promotion} />
             </Switch>
           </section>
 
