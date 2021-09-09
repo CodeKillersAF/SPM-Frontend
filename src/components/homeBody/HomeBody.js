@@ -2,6 +2,7 @@ import React from 'react';
 import './homeBody.css';
 
 function HomeBody() {
+
     return (
             <section className="home" id="home">
                 <div className="home-slider">
@@ -24,7 +25,6 @@ function HomeBody() {
                     <div className="swiper-pagination"></div>
 
                 </div>
-
     </section>
 
     )

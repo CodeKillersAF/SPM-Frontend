@@ -3,38 +3,22 @@ import './foodmenu.css';
 import { useState } from 'react';
 import axios from 'axios';
 import { useEffect } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Modal from '@material-ui/core/Modal';
-import Backdrop from '@material-ui/core/Backdrop';
-import Fade from '@material-ui/core/Fade';
 
-// import Rating from '@material-ui/lab/Rating';
-// import Typography from '@material-ui/core/Typography';
-// import Box from '@material-ui/core/Box';
-
-const useStyles = makeStyles((theme) => ({
-  modal: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  paper: {
-    backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
-  },
-}));
-
+import Popup from '../popup/Popup';
 
 function FoodMenu() {
 
-  const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => {
     setOpen(true);
   };
+
+
+  // const rateFoodId = (id) => {
+  //   handleOpen();
+  //   console.log(id);
+  // }
 
   const handleClose = () => {
     setOpen(false);
@@ -84,9 +68,44 @@ function FoodMenu() {
       getAllFoods();
     }, []);
 
+    const [cart, setCart] = useState([]);
+
+    const setIds = (id, name) => {
+      cart[0] = id;
+      setCart([id, name, ...cart]);
+      console.log(cart);
+      console.log(name);
+    }
+
+    // const [FoodId, setFoodId] = useState('');
+
+    // const getFoodIdRate = (id) => {
+    //     // handleOpen();
+    //      setFoodId(id);
+    // }
+
+    const [foodName, setFoodName] = useState('');
+    const [foodId, setFoodId] = useState('');
+
+    const getFoodForStar = (id) => {
+        axios.get(`http://localhost:8000/api/food/one-food/${id}`)
+        .then((response) => {
+          console.log(response.data.data);
+          setFoodName(response.data.data.foodName);
+          setFoodId(response.data.data._id);
+          handleOpen();
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+    }
+
     return (
 
     <div>
+
+        <Popup open={open} onClose={handleClose} foodname={foodName} foodid={foodId} />
+
       <div className="searchFoodItems">
        <input type="text" className="input-search" placeholder="Search Food Name Or Prices" 
         onChange={(e) => {setSearchTerm(e.target.value) }}
@@ -128,59 +147,22 @@ function FoodMenu() {
             <div className="image">
                 <img src={all.url} alt="dbUrl" />
                 <div className="fa fa-star"
-                  onClick={handleOpen}
+                  onClick={() => getFoodForStar(all._id)}
                 ></div>
-
-                {/* ------------------ Modal design start ---------------------------- */}
-                    <Modal
-                        aria-labelledby="transition-modal-title"
-                        aria-describedby="transition-modal-description"
-                        className={classes.modal}
-                        open={open}
-                        onClose={handleClose}
-                        closeAfterTransition
-                        BackdropComponent={Backdrop}
-                        BackdropProps={{
-                          timeout: 500,
-                        }}
-                      >
-
-                  {/* <Fade in={open}>
-                      <div className={classes.paper}> */}
-                        {/* ------------ Rate form starts ------------------- */}
-                        {/* <input type="text" placeholder="Enter Your Name" /> */}
-                        {/* <Box component="fieldset" mb={3} borderColor="transparent">
-                            <Typography component="legend">Rate Here</Typography>
-                            <Rating
-                            name="simple-controlled"
-                            value={value}
-                            onChange={(e, newValue) => {
-                                setValue(newValue);
-                            }}
-                        />
-
-                        <h3>{value}</h3>
-                        </Box> */}
-
-                        {/* --------------- Rate form ends ---------------- */}
-
-                      {/* </div>
-                 </Fade> */}
-
-                  </Modal>
-                {/* ------------------- Modal design ends ---------------------- */}
                 
             </div>
             <div className="content">
 
                 <h3>{all.foodName}</h3>
                 <p>{all.foodDescription}</p>
-                <button className="btn">add to cart</button>
+                <button className="btn" onClick={() => setIds(all._id, all.foodName)} >add to cart</button>
                 <span className="price">Rs.{all.foodPrice}</span>
             </div>
+
+            <h1></h1>
+
         </div>
   ))} 
-       
 
     </div>
 
