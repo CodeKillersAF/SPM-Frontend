@@ -5,6 +5,7 @@ import Navbar from "./components/navbar/Navbar";
 import Footer from "./components/footer/Footer";
 
 import FoodMenu from "./components/foodMenu/FoodMenu";
+import TestCart from "./components/testCart/TestCart";
 
 import Home from "./pages/home/Home";
 
@@ -18,6 +19,7 @@ function App() {
             <Switch>
                 <Route path="/" component={Home} exact />
                 <Route path="/menu" component={FoodMenu} />
+                <Route path="/test" component={TestCart} />
             </Switch>
           </section>
 
