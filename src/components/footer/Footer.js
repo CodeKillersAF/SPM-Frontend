@@ -5,7 +5,7 @@ function Footer() {
     return (
         <section className="footer">
 
-    <div className="box-container">
+     <div className="box-container">
 
         <div className="box">
             <h3>locations</h3>
