@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './navbar.css';
 import { Link } from 'react-router-dom';
-import Cart from '../cart/Cart';
-function Navbar(props) {
 
-    const {responses , total} = props
+function Navbar() {
 
     return (
+
+        <div>
         <header>
             <a href="#" className="logo"><i class="fas fa-utensils"></i>SPM</a> 
               <div className="navbar" id="myTopnav">
@@ -19,8 +19,10 @@ function Navbar(props) {
                  <Link to="/order">Order</Link>  
                  
              </div>
-                <Cart responses = {responses} total = {total} ></Cart>
+
          </header>
+
+</div>
     )
 }
 

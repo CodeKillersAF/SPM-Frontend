@@ -5,10 +5,22 @@ import axios from 'axios';
 import { useEffect } from 'react';
 import './tab.css';
 import TableCart from './TableCart';
+// import Cartp from '../cartp/Cart';
 
 // import Popup from '../popup/Popup';
 
 function TestCart() {
+
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
     const [getAllCategories, setGetallcategories] = useState([]);
 
@@ -83,10 +95,9 @@ function TestCart() {
 
     return (
 
-    <div>
-
+        <div>
             <div className="foodItemCenter" style={{marginTop: 50}}>
-          {getAllCategories.map((ac) => (
+            {getAllCategories.map((ac) => (
              <div className="foodItemDiv">
                   <button className="foodItemCategory" onClick={() => getCategoryFoods(ac._id)}>
                         {ac.categoryName}
@@ -97,8 +108,13 @@ function TestCart() {
 
         <section className="menu" id="menu">
 
-    <h3 className="sub-heading"> our menu </h3>
-    <h1 className="heading"> today's speciality </h1>
+            <h3 className="sub-heading"> our menu </h3>
+            <h1 className="heading"> today's speciality </h1>
+
+            <div className="iconCart">
+                  <button class="fas fa-shopping-cart" onClick={handleOpen} />
+                  <h4 style={{display: 'inline-block'}} onClick={handleOpen}>Cart</h4>
+            </div>
 
     <div className="box-container">
 
@@ -119,14 +135,12 @@ function TestCart() {
                 <span className="price">Rs.{all.foodPrice}</span>
             </div>
 
-            <h1></h1>
-
         </div>
   ))} 
 
     </div>
 
-    <TableCart cartItem={cartItem} onAdd={onAdd} onRemove={onRemove} />
+    <TableCart open={open} onClose={handleClose} cartItem={cartItem} onAdd={onAdd} onRemove={onRemove} />
 
 </section>
 </div>
