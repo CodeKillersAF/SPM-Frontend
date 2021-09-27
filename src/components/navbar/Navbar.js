@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import './navbar.css';
 import { Link } from 'react-router-dom';
-import TableCart from '../testCart/TableCart';
 
 function Navbar() {
 
@@ -9,7 +8,6 @@ function Navbar() {
 
         <div>
         <header>
-          
             <a href="#" className="logo"><i class="fas fa-utensils"></i>SPM</a> 
               <div className="navbar" id="myTopnav">
            
@@ -17,8 +15,9 @@ function Navbar() {
                  <Link to="/table">Table</Link>  
                  <Link to="/about">About</Link>  
                  <Link to="/menu">Menu</Link>  
-                 <Link to="/review">Review</Link>  
+                 <Link to="/offer">Review</Link>  
                  <Link to="/order">Order</Link>  
+                 
              </div>
 
          </header>
