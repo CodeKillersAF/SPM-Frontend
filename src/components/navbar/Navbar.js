@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './navbar.css';
 import { Link } from 'react-router-dom';
+import TableCart from '../testCart/TableCart';
 
 function Navbar() {
 
     return (
+
+        <div>
         <header>
           
             <a href="#" className="logo"><i class="fas fa-utensils"></i>SPM</a> 
@@ -18,16 +21,9 @@ function Navbar() {
                  <Link to="/order">Order</Link>  
              </div>
 
-             <div className="iconCart">
-                <a href="#" class="fas fa-shopping-cart"></a>
-            </div>
-
-            
-
          </header>
 
-
-
+</div>
     )
 }
 

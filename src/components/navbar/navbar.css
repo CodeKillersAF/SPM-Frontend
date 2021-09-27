@@ -34,7 +34,7 @@ header .navbar a:hover{
     background: var(--orange);
 }
 
-header .iconCart a{
+header .iconCart button{
     cursor: pointer;
     margin-left: .5rem;
     height:4.5rem;
@@ -47,7 +47,7 @@ header .iconCart a{
     background: #eee;
 }
 
-header .iconCart a:hover{
+header .iconCart button:hover{
     color:#fff;
     background: var(--orange);
     transform: rotate(360deg);

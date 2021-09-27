@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useEffect } from 'react';
 
 import Popup from '../popup/Popup';
+import TableCart from '../testCart/TableCart';
 
 function FoodMenu() {
 
@@ -14,14 +15,18 @@ function FoodMenu() {
     setOpen(true);
   };
 
-
-  // const rateFoodId = (id) => {
-  //   handleOpen();
-  //   console.log(id);
-  // }
-
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const [cartopen, setCartOpen] = React.useState(false);
+
+  const handleOpenCart = () => {
+    setCartOpen(true);
+  };
+
+  const handleCloseCart = () => {
+    setCartOpen(false);
   };
 
     // popup ends here ---------------------------------------------------------
@@ -77,13 +82,6 @@ function FoodMenu() {
       console.log(name);
     }
 
-    // const [FoodId, setFoodId] = useState('');
-
-    // const getFoodIdRate = (id) => {
-    //     // handleOpen();
-    //      setFoodId(id);
-    // }
-
     const [foodName, setFoodName] = useState('');
     const [foodId, setFoodId] = useState('');
 
@@ -100,16 +98,53 @@ function FoodMenu() {
         })
     }
 
+        // cart test start
+        const [cartItem, setCartItem] = useState([]);
+
+
+        const onAdd = (food) => {
+          const exist = cartItem.find((plus) => ( plus._id === food._id ));
+    
+          if(exist){
+            setCartItem(cartItem.map((plus) => (
+               plus._id === food._id ? {...exist, qty: exist.qty+1 } : plus
+            )));
+          }
+          else{
+            setCartItem([...cartItem, {...food, qty: 1}]);
+          }
+        }
+    
+        const onRemove = (food) => {
+          const exist = cartItem.find((minus) => ( minus._id === food._id ));
+          if(exist.qty === 1){
+            setCartItem(cartItem.filter((minus) => minus._id !== food._id));
+          }
+          else{
+            setCartItem(cartItem.map((minus) => (
+              minus._id === food._id ? {...exist, qty: exist.qty-1 } : minus
+            )));
+          }
+        }
+
     return (
 
     <div>
 
         <Popup open={open} onClose={handleClose} foodname={foodName} foodid={foodId} />
 
-      <div className="searchFoodItems">
-       <input type="text" className="input-search" placeholder="Search Food Name Or Prices" 
-        onChange={(e) => {setSearchTerm(e.target.value) }}
-            />
+        <TableCart cartopen={cartopen} onClose={handleCloseCart} cartItem={cartItem} onAdd={onAdd} onRemove={onRemove} />
+
+          <div className="SearchIconHeader">
+              <div className="searchFoodItems">
+                <input type="text" className="input-search" placeholder="Search Food Name Or Prices" 
+                  onChange={(e) => {setSearchTerm(e.target.value) }}
+                />
+              </div>
+              <div className="iconCart">
+                  <button class="fas fa-shopping-cart" onClick={handleOpenCart} />
+                  {/* <h4 style={{display: 'inline-block'}} onClick={handleOpen}>Cart</h4> */}
+              </div>
           </div>
 
 
@@ -155,7 +190,7 @@ function FoodMenu() {
 
                 <h3>{all.foodName}</h3>
                 <p>{all.foodDescription}</p>
-                <button className="btn" onClick={() => setIds(all._id, all.foodName)} >add to cart</button>
+                <button className="btn" onClick={() => onAdd(all)} >add to cart</button>
                 <span className="price">Rs.{all.foodPrice}</span>
             </div>
 

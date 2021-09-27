@@ -9,15 +9,68 @@ table, td, th {
   }
 
 .add{
-    width: 50px;
-    height: 20px;
-    background-color: black;
+    width: 30px;
+    height: 30px;
+    background-color: var(--black);
     color: blanchedalmond;
 }
 
 .remove{
-    width: 50px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     background-color: red;
     color: blanchedalmond;
 }
+
+.iconCart button{
+  cursor: pointer;
+  margin-left: 90rem;
+  height:4.5rem;
+  line-height: 4.5rem;
+  width:4.5rem;
+  text-align: center;
+  font-size: 1.7rem;
+  color:var(--black);
+  border-radius: 50%;
+  background: #eee;
+}
+
+.iconCart h4{
+  color: var(--black);
+  font-size: small;
+}
+
+.iconCart h4:hover{
+  color:#fff;
+  padding: 7px 30px;
+  border-radius: 10px;
+  background: var(--orange);
+}
+
+.iconCart button:hover{
+  color:#fff;
+  background: var(--orange);
+  transform: rotate(360deg);
+}
+
+.row{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  margin-bottom: 30px;
+}
+
+.row .addremovebutton{
+  margin-left: 50px;
+}
+
+.row button{
+  margin-left: 5px;
+}
+
+.row h2{
+  color: gray;
+  margin-left: 30px;
+}
+
