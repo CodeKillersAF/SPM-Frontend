@@ -2,7 +2,8 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import "./tableItem.css";
 
-export default function TableItem({ item }) {
+export default function TableItem({ item ,onClickOpenBookForm}) {
+
   const [table, settable] = useState({});
   useEffect(() => {
     const getTable = async () => {
@@ -26,7 +27,7 @@ export default function TableItem({ item }) {
           <div className="table-text">
             <h2>{table.name}</h2>
             <p>{table.description}</p>
-            <button className="table-button">Book Now</button>
+            <button className="table-button" onClick={e=>onClickOpenBookForm(table)} >Book Now</button>
           </div>
 
           <div className="table-attribute">
