@@ -123,6 +123,7 @@
     border-style: solid;
     border-color: #fff;
     padding: 10px 10px;
+    background-color: #fff;
 }
 
 .foodItemDiv button:focus{

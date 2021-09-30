@@ -14,6 +14,7 @@ import TestCart from "./components/testCart/TestCart";
 import Home from "./pages/home/Home";
 import Table from "./pages/table/Table";
 import Promotion from "./pages/promotion/Promotion";
+import ContactUs from "./components/contactUs/ContactUs";
 
 function App() {
   return (
@@ -31,6 +32,8 @@ function App() {
                 {/* <Route path="/table" component={Table} /> */}
                 <Route path="/table" component={Table} />
                 <Route path="/offer" component={Promotion} />
+
+                <Route path="/contact" component={ContactUs} />
 
             </Switch>
           </section>

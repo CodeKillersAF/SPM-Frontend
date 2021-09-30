@@ -143,7 +143,6 @@ function FoodMenu() {
               </div>
               <div className="iconCart">
                   <button class="fas fa-shopping-cart" onClick={handleOpenCart} />
-                  {/* <h4 style={{display: 'inline-block'}} onClick={handleOpen}>Cart</h4> */}
               </div>
           </div>
 
@@ -152,6 +151,9 @@ function FoodMenu() {
           {getAllCategories.map((ac) => (
              <div className="foodItemDiv">
                   <button className="foodItemCategory" onClick={() => getCategoryFoods(ac._id)}>
+                        <img src={ac.url}
+                            width="40px" height="40px"
+                        /><br/>
                         {ac.categoryName}
                   </button>
              </div>
