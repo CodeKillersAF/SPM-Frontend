@@ -1,7 +1,17 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import './homeBody.css';
+import { init } from 'ityped';
 
 function HomeBody() {
+
+    const textRef = useRef();
+
+    useEffect(() => {
+        init(textRef.current, { 
+            showCursor: false, 
+            strings: ["Welcome...~! To Restaurant"],  
+        })
+    }, []);
 
     return (
             <section className="home" id="home">
@@ -9,7 +19,7 @@ function HomeBody() {
                     <div className="wrapper">
                         <div className="slide">
                             <div className="content">
-                                <span>Welcome....~!</span>
+                                <span ref={textRef}></span>
                                 <h3>SPM Project</h3>
                                 <p>Frontend design for spm project side</p>
                                 <a href="#" className="btn">order now</a>
