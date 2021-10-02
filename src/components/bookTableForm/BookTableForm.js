@@ -28,9 +28,9 @@ export default function BookTableForm({onClickCloseBookForm, booking,onBookingCh
       <form className={classes.root} onSubmit={submitTableBooking}>
         <Grid container>
           <Grid item xs={6}>
-          <TextField variant="outlined" name="tableName" label="table" value={booking.tableName} onChange={onBookingChange} />
-            <TextField variant="outlined"  label="Name" value={booking.customerName} name="customerName" onChange={onBookingChange}/>
-            <TextField variant="outlined"  label="Email" value={booking.email} name="email" onChange={onBookingChange}/>
+          <TextField  required={true} variant="outlined" name="tableName" label="table" value={booking.tableName} onChange={onBookingChange} />
+            <TextField  autoFocus variant="outlined" required={true}  label="Name" value={booking.customerName} name="customerName" onChange={onBookingChange}/>
+            <TextField variant="outlined" required={true}  label="Email" value={booking.email} name="email" onChange={onBookingChange}/>
             </Grid>
             <Grid item xs={6}>
             <TextField
@@ -39,6 +39,8 @@ export default function BookTableForm({onClickCloseBookForm, booking,onBookingCh
               name="phone"
               value={booking.phone}
               onChange={onBookingChange}
+              type="number"
+              required={true}
             />
             
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -52,6 +54,7 @@ export default function BookTableForm({onClickCloseBookForm, booking,onBookingCh
                 value={booking.date}
                 onChange={date => onBookingChange({ target: { name: "date", value: date } })}
                 name="date"
+                required={true}
               />
               <KeyboardTimePicker
                 id="time-picker"
@@ -64,6 +67,7 @@ export default function BookTableForm({onClickCloseBookForm, booking,onBookingCh
                 value={booking.time}
                 onChange={time => onBookingChange({ target: { name: "time", value: time } })}
                 name="time"
+                required={true}
               />
             </MuiPickersUtilsProvider>
             <div
