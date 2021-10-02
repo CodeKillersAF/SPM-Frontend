@@ -7,6 +7,32 @@ import PopupWindow from "../../components/popupWindow/PopupWindow";
 import BookTableForm from "../../components/bookTableForm/BookTableForm";
 
 function Table() {
+  const [booking, setBooking] = useState({
+    tableId: "",
+    tableName: "",
+    date: new Date(),
+    time : new Date().getHours() + ":" + new Date().getMinutes(),
+    numberOfPeople: "",
+    customerName: "",
+    email: "",
+    phone: "",
+  });
+
+  const submitTableBooking = (e) => {
+    e.preventDefault();
+    axios
+      .post("http://localhost:8000/api/tableBook", booking)
+      .then((res) => {
+        console.log(res);
+        console.log(res.data);
+        setFormOpen(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+
   const [selectedCategory, setSelectedCategory] = useState({
     tables: [],
     name: "",
@@ -39,6 +65,19 @@ function Table() {
   const [searchTerm, setSearchTerm] = useState("");
 
   const [category, setCategory] = useState([]);
+
+  const onClickOpenBookForm = (selectedTable) => {
+    console.log(selectedTable);
+    setBooking({tableName: selectedTable.name, tableId: selectedTable._id});
+    setFormOpen(true);
+  };
+  const onClickCloseBookForm = () => {
+    setFormOpen(false);
+  };
+
+  const onBookingChange = (e) => {
+    setBooking({  ...booking, [e.target.name]: e.target.value });
+  };
 
   const [table, setTable] = useState([
     {
@@ -75,14 +114,18 @@ function Table() {
     },
   ]);
 
-  const [formOpen, setFormOpen] = useState(true);
+  const [formOpen, setFormOpen] = useState(false);
 
   const onClickFormOpen = () => {
     setFormOpen(true);
   };
   return (
     <div>
-      <PopupWindow openPopup={formOpen} title ="Book Table" form={<BookTableForm/>} />
+      <PopupWindow
+        openPopup={formOpen}
+        title="Book Table"
+        form={<BookTableForm onClickCloseBookForm={onClickCloseBookForm} booking={booking} onBookingChange={onBookingChange} submitTableBooking={submitTableBooking}/>}
+      />
 
       <div className="table-container">
         <h3 className="tableheading"> our tables </h3>
@@ -90,22 +133,22 @@ function Table() {
         <div className="table-center">
           <div className="table-category-div">
             {category.map((c) => (
-              <button
-                className="table-category-button"
-                onClick={() => onClickFormOpen(c)}
-              >
-                {c.name}
-              </button>
+              <button className="table-category-button">{c.name}</button>
             ))}
           </div>
         </div>
 
         <div className="table" id="table">
-          {selectedCategory.tables.map((item, index) => (
-            <div>
-              <TableItem item={item} index={index} />
-            </div>
-          ))}
+          {selectedCategory &&
+            selectedCategory.tables.map((item, index) => (
+              <div>
+                <TableItem
+                  item={item}
+                  index={index}
+                  onClickOpenBookForm={onClickOpenBookForm}
+                />
+              </div>
+            ))}
         </div>
       </div>
     </div>
