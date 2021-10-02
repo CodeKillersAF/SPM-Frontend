@@ -53,7 +53,7 @@ function Popup({ open, onClose, foodname, foodid }) {
     };
 
     axios
-      .post("http://localhost:8000/api/rate/add-rate", ratingData)
+      .post("https://kasuki-backend.herokuapp.com/api/rate/add-rate", ratingData)
       .then((response) => {
         // console.log(response.data.data);
 
@@ -64,7 +64,7 @@ function Popup({ open, onClose, foodname, foodid }) {
         };
 
         axios
-          .put(`http://localhost:8000/api/food/update-rate/${foodid}`, rate)
+          .put(`https://kasuki-backend.herokuapp.com/api/food/update-rate/${foodid}`, rate)
           .then((response) => {
             // console.log(response.data.data);
             console.log("updated");

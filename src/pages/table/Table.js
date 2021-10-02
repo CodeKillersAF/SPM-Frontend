@@ -5,8 +5,10 @@ import axios from "axios";
 import TableItem from "../../components/tableItem/TableItem";
 import PopupWindow from "../../components/popupWindow/PopupWindow";
 import BookTableForm from "../../components/bookTableForm/BookTableForm";
+import AlertCart from "../../components/alertCart/AlertCart";
 
 function Table() {
+  const [alertOpen, setAlertOpen] = React.useState(false);
   const [booking, setBooking] = useState({
     tableId: "",
     tableName: "",
@@ -26,6 +28,7 @@ function Table() {
         console.log(res);
         console.log(res.data);
         setFormOpen(false);
+        setAlertOpen(true);
       })
       .catch((err) => {
         console.log(err);
@@ -97,6 +100,11 @@ function Table() {
   };
   return (
     <div>
+      <AlertCart
+        open={alertOpen}
+        message="Table Booked Successfully!"
+        onClose={()=>setAlertOpen(false)}
+      />
       <PopupWindow
         openPopup={formOpen}
         title="Book Table"
