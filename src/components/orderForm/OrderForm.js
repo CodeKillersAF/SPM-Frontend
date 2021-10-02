@@ -7,6 +7,7 @@ import Select from "react-select";
 import axios from "axios";
 import TextField from '@material-ui/core/TextField';
 import './orderForm.css';
+// import TableCart from "../testCart/TableCart";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -29,20 +30,38 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function OrderForm(props) {
-  const { responses } = props;
+  const { responses, open, onClose, cartItem, itemsPrice } = props;
+
+  console.log('cart item', cartItem);
+  console.log('item price', itemsPrice);
+  var item_ids = [];
+  var qtys =[];
+  var item_name = [];
+
+  cartItem.map((a) => {
+    console.log('food name : ' , a.foodName);
+    item_ids.push(a._id);
+    qtys.push(a.qty)
+    item_name.push(a.foodName)
+
+  })
+
+  console.log('item ids', item_ids);
+  console.log('quantity', qtys)
+  console.log('item name', item_name);
 
   const copy_res = responses;
-  var item_ids = [];
+  
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
+  // const [open, setOpen] = React.useState(false);
 
-  const handleOpen = () => {
-    setOpen(true);
-  };
+  // const handleOpen = () => {
+  //   setOpen(true);
+  // };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+  // const handleClose = () => {
+  //   setOpen(false);
+  // };
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -50,6 +69,7 @@ export default function OrderForm(props) {
   const [telephone, setTelephone] = useState("");
   const [type, setType] = useState("");
   const [orderId, setorderId] = useState("");
+  const [address, setAddress] = useState("");
   const [disableTrigger, setDisableTrigger] = useState(true);
 
   const options = [
@@ -68,7 +88,8 @@ export default function OrderForm(props) {
         item_ids.push(res.id)
     })
 
-    console.log('item_ids',item_ids)
+    // console.log('item_ids',item_ids);
+    // console.log('qtys',qtys);
 
     var order = {
         first_name: firstName,
@@ -76,11 +97,17 @@ export default function OrderForm(props) {
         email: email,
         telephone: telephone,
         items: item_ids,
+        order_items_names: item_name,
+        quantity: qtys,
+        address: address,
+        total_price: itemsPrice
       };
+
+      console.log('send order' , order);
 
     if (type === "delivery") {
       axios
-        .post("http://localhost:8000/api/online-delivery/create-order", order)
+        .post("https://kasuki-backend.herokuapp.com/api/online-delivery/create-order", order)
         .then((response) => {
           console.log(response.data.data);
           alert("Delivery order is settled");
@@ -92,7 +119,7 @@ export default function OrderForm(props) {
         });
     } else if (type === "takeaway") {
       axios
-        .post("http://localhost:8000/api/online-take-away/create-order", order)
+        .post("https://kasuki-backend.herokuapp.com/api/online-take-away/create-order", order)
         .then((response) => {
           console.log(response.data.data);
           alert("Take away order is settled");
@@ -112,12 +139,12 @@ export default function OrderForm(props) {
     if (type === "delivery") {
       axios
         .delete(
-          `http://localhost:8000/api/online-delivery/delete-order/${orderId}`
+          `https://kasuki-backend.herokuapp.com/api/online-delivery/delete-order/${orderId}`
         )
         .then((response) => {
           console.log(response.data.data);
           alert("Delivery ordere deleted");
-          handleClose();
+          onClose();
         })
         .catch((error) => {
           console.log(error);
@@ -125,12 +152,12 @@ export default function OrderForm(props) {
     } else if (type === "takeaway") {
       axios
         .delete(
-          `http://localhost:8000/api/online-take-away/delete-order/${orderId}`
+          `https://kasuki-backend.herokuapp.com/api/online-take-away/delete-order/${orderId}`
         )
         .then((response) => {
           console.log(response.data.data);
           alert("Take away order deleted");
-          handleClose();
+          onClose();
         })
         .catch((error) => {
           console.log(error);
@@ -142,17 +169,17 @@ export default function OrderForm(props) {
 
   return (
     <div>
-      <button className="orderNow-button" type="button" onClick={handleOpen}>
+      {/* <button className="orderNow-button" type="button" onClick={handleOpen}>
         Order Now
-      </button>
+      </button> */}
 
-      
+      {/* <TableCart open={open} onClose={} />  */}
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
         className={classes.modal}
         open={open}
-        onClose={handleClose}
+        onClose={onClose}
         closeAfterTransition
         BackdropComponent={Backdrop}
         BackdropProps={{
@@ -222,6 +249,16 @@ export default function OrderForm(props) {
                   variant="outlined"
                   value={telephone}
                   onChange={(e) => setTelephone(e.target.value)}
+                  required={true}
+                />
+                <br />
+                
+                <TextField
+                  id="outlined-basic"
+                  label="Address"
+                  variant="outlined"
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
                   required={true}
                 />
 

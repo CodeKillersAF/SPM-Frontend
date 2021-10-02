@@ -1,0 +1,144 @@
+table, td, th {
+    border: 1px solid black;
+    font-size: 20px;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+.add{
+    width: 30px;
+    height: 30px;
+    background-color: var(--black);
+    color: blanchedalmond;
+}
+
+.remove{
+    width: 30px;
+    height: 30px;
+    background-color: red;
+    color: blanchedalmond;
+}
+
+.iconCart button{
+  cursor: pointer;
+  margin-left: 90rem;
+  height:4.5rem;
+  line-height: 4.5rem;
+  width:4.5rem;
+  text-align: center;
+  font-size: 1.7rem;
+  color:var(--black);
+  border-radius: 50%;
+  background: #eee;
+}
+
+.iconCart h4{
+  color: var(--black);
+  font-size: small;
+}
+
+.iconCart h4:hover{
+  color:#fff;
+  padding: 7px 30px;
+  border-radius: 10px;
+  background: var(--orange);
+}
+
+.iconCart button:hover{
+  color:#fff;
+  background: var(--orange);
+  transform: rotate(360deg);
+}
+
+.row{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  margin-bottom: 30px;
+}
+
+.row .addremovebutton{
+  margin-left: 50px;
+}
+
+.row button{
+  margin-left: 5px;
+}
+
+.row h2{
+  color: gray;
+  margin-left: 30px;
+}
+
+.orderForm .button-order{
+  display: flex;
+  flex-direction: row;
+}
+
+.orderForm .order-button{
+  margin-top: 4rem;
+  font-size: 1.7rem;
+  color:#fff;
+  background: var(--black);
+  border-radius: .5rem;
+  cursor: pointer;
+  padding: 7px;
+  width: 30%;
+  height: 40px;
+  margin-left: 2px;
+}
+
+.orderForm .order-button:hover{
+  background: var(--orange);
+  font-size: 1.8rem;
+}
+
+.orderForm .order-delete{
+  margin-top: 4rem;
+  font-size: 1.7rem;
+  color:#fff;
+  background: var(--black);
+  border-radius: .5rem;
+  cursor: pointer;
+  padding: 7px;
+  width: 50%;
+  height: 40px;
+  margin-left: 100px;
+}
+
+.order-delete:disabled{
+  margin-top: 4rem;
+  font-size: 1.7rem;
+  color:#fff;
+  background: gray;
+  border-radius: .5rem;
+  cursor: pointer;
+  padding: 7px;
+  width: 50%;
+  height: 40px;
+  margin-left: 100px;
+}
+
+.order-delete:disabled:hover{
+  background: red;
+}
+
+.order-delete:hover{
+  background: var(--orange);
+}
+
+.orderNow-button{
+  margin-top: 2rem;
+  font-size: 1.7rem;
+  color:#fff;
+  background: var(--black);
+  border-radius: .5rem;
+  cursor: pointer;
+  padding: 7px;
+  width: 100%;
+  margin-left: 2px;
+}

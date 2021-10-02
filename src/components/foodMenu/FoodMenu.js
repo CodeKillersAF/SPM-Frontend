@@ -5,8 +5,22 @@ import axios from 'axios';
 import { useEffect } from 'react';
 
 import Popup from '../popup/Popup';
+import TableCart from '../testCart/TableCart';
+import { makeStyles } from '@material-ui/core/styles';
+import AlertCart from '../alertCart/AlertCart';
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+      width: '100%',
+      '& > * + *': {
+        marginTop: theme.spacing(2),
+      },
+    },
+  }));
 
 function FoodMenu() {
+
+  const classes = useStyles();
 
   const [open, setOpen] = React.useState(false);
 
@@ -14,14 +28,29 @@ function FoodMenu() {
     setOpen(true);
   };
 
-
-  // const rateFoodId = (id) => {
-  //   handleOpen();
-  //   console.log(id);
-  // }
-
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const [cartopen, setCartOpen] = React.useState(false);
+
+  const handleOpenCart = () => {
+    setCartOpen(true);
+  };
+
+  const handleCloseCart = () => {
+    setCartOpen(false);
+  };
+
+
+  const [alertOpen, setAlertOpen] = React.useState(false);
+
+  const handleOpenCartAdd = () => {
+    setAlertOpen(true);
+  };
+
+  const handleCloseCartAdd = () => {
+    setAlertOpen(false);
   };
 
     // popup ends here ---------------------------------------------------------
@@ -34,7 +63,7 @@ function FoodMenu() {
     const [displayAllFoods, setDisplayAllFoods] = useState([]);
 
     const getCategoryList = () => {
-      axios.get("http://localhost:8000/api/category/all-category")
+      axios.get("https://kasuki-backend.herokuapp.com/api/category/all-category")
         .then((response) => {
           console.log(response.data.data);
           setGetallcategories(response.data.data);
@@ -45,7 +74,7 @@ function FoodMenu() {
     }
 
     const getAllFoods = () => {
-      axios.get("http://localhost:8000/api/food/all-food")
+      axios.get("https://kasuki-backend.herokuapp.com/api/food/all-food")
         .then((response) => {
           console.log(response.data.data);
           setDisplayAllFoods(response.data.data);
@@ -53,7 +82,7 @@ function FoodMenu() {
     }
 
     const getCategoryFoods = (id) => {
-      axios.get(`http://localhost:8000/api/category/own-category/${id}`)
+      axios.get(`https://kasuki-backend.herokuapp.com/api/category/own-category/${id}`)
         .then((response) => {
             console.log(response.data.foodItems);
             setDisplayAllFoods(response.data.foodItems);
@@ -77,18 +106,11 @@ function FoodMenu() {
       console.log(name);
     }
 
-    // const [FoodId, setFoodId] = useState('');
-
-    // const getFoodIdRate = (id) => {
-    //     // handleOpen();
-    //      setFoodId(id);
-    // }
-
     const [foodName, setFoodName] = useState('');
     const [foodId, setFoodId] = useState('');
 
     const getFoodForStar = (id) => {
-        axios.get(`http://localhost:8000/api/food/one-food/${id}`)
+        axios.get(`https://kasuki-backend.herokuapp.com/api/food/one-food/${id}`)
         .then((response) => {
           console.log(response.data.data);
           setFoodName(response.data.data.foodName);
@@ -100,16 +122,53 @@ function FoodMenu() {
         })
     }
 
+        // cart test start
+        const [cartItem, setCartItem] = useState([]);
+
+
+        const onAdd = (food) => {
+          const exist = cartItem.find((plus) => ( plus._id === food._id ));
+    
+          if(exist){
+            setCartItem(cartItem.map((plus) => (
+               plus._id === food._id ? {...exist, qty: exist.qty+1 } : plus
+            )));
+          }
+          else{
+            setCartItem([...cartItem, {...food, qty: 1}]);
+          }
+          handleOpenCartAdd();
+        }
+    
+        const onRemove = (food) => {
+          const exist = cartItem.find((minus) => ( minus._id === food._id ));
+          if(exist.qty === 1){
+            setCartItem(cartItem.filter((minus) => minus._id !== food._id));
+          }
+          else{
+            setCartItem(cartItem.map((minus) => (
+              minus._id === food._id ? {...exist, qty: exist.qty-1 } : minus
+            )));
+          }
+        }
+
     return (
 
     <div>
-
         <Popup open={open} onClose={handleClose} foodname={foodName} foodid={foodId} />
 
-      <div className="searchFoodItems">
-       <input type="text" className="input-search" placeholder="Search Food Name Or Prices" 
-        onChange={(e) => {setSearchTerm(e.target.value) }}
-            />
+        <TableCart cartopen={cartopen} onClose={handleCloseCart} cartItem={cartItem} onAdd={onAdd} onRemove={onRemove} />
+
+          <div className="SearchIconHeader">
+              <div className="searchFoodItems">
+                <input type="text" className="input-search" placeholder="Search Food Name Or Prices" 
+                  onChange={(e) => {setSearchTerm(e.target.value) }}
+                />
+              </div>
+              <div className="iconCart">
+                  <button class="fas fa-shopping-cart" onClick={handleOpenCart} />
+                  {/* <h4 style={{display: 'inline-block'}} onClick={handleOpen}>Cart</h4> */}
+              </div>
           </div>
 
 
@@ -117,6 +176,9 @@ function FoodMenu() {
           {getAllCategories.map((ac) => (
              <div className="foodItemDiv">
                   <button className="foodItemCategory" onClick={() => getCategoryFoods(ac._id)}>
+                        <img src={ac.url}
+                            width="40px" height="40px"
+                        /><br/>
                         {ac.categoryName}
                   </button>
              </div>
@@ -155,7 +217,7 @@ function FoodMenu() {
 
                 <h3>{all.foodName}</h3>
                 <p>{all.foodDescription}</p>
-                <button className="btn" onClick={() => setIds(all._id, all.foodName)} >add to cart</button>
+                <button className="btn" onClick={() => onAdd(all)} >add to cart</button>
                 <span className="price">Rs.{all.foodPrice}</span>
             </div>
 
@@ -165,6 +227,12 @@ function FoodMenu() {
   ))} 
 
     </div>
+
+    <AlertCart
+        open={alertOpen}
+        message="Added to cart successfully"
+        onClose={handleCloseCartAdd}
+      />
 
 </section>
 </div>
