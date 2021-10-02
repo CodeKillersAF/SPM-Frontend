@@ -1,0 +1,12 @@
+.loadingScreenDesign {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.loadingScreenDesign .kasukiName{
+    color: var(--black);
+    font-size: 80px;
+    font-weight: bold;
+}

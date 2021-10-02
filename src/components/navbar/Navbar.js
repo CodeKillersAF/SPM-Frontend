@@ -8,15 +8,13 @@ function Navbar() {
 
         <div>
         <header>
-            <a href="#" className="logo"><i class="fas fa-utensils"></i>SPM</a> 
+            <a href="#" className="logo"><i class="fas fa-utensils"></i>KASUKI</a> 
               <div className="navbar" id="myTopnav">
            
                  <Link to="/">Home</Link>     
                  <Link to="/table">Table</Link>  
                  <Link to="/contact">About</Link>  
                  <Link to="/menu">Menu</Link>  
-                 <Link to="/offer">Review</Link>  
-                 <Link to="/order">Order</Link>  
                  
              </div>
 

@@ -137,7 +137,7 @@ function FoodMenu() {
 
           <div className="SearchIconHeader">
               <div className="searchFoodItems">
-                <input type="text" className="input-search" placeholder="Search Food Name Or Prices" 
+                <input type="text" className="input-search" placeholder="Search Food Name" 
                   onChange={(e) => {setSearchTerm(e.target.value) }}
                 />
               </div>

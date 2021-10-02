@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Navbar from "./components/navbar/Navbar";
@@ -15,10 +15,20 @@ import Home from "./pages/home/Home";
 import Table from "./pages/table/Table";
 import Promotion from "./pages/promotion/Promotion";
 import ContactUs from "./components/contactUs/ContactUs";
+import LoadingScreen from '.././src/components/loadingScreen/LoadingScreen';
 
 function App() {
+
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    setTimeout(() => setLoading(false), 4000)
+  }, [])
+
   return (
    
+    <>
+    {loading === false ? (
     <div>
       <Router>
           <Navbar />
@@ -41,7 +51,10 @@ function App() {
           <Footer />
       </Router>
     </div>
-
+    ) : (
+        <LoadingScreen />
+    )}
+    </>
   );
 }
 
