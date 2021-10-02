@@ -137,12 +137,13 @@ function FoodMenu() {
 
           <div className="SearchIconHeader">
               <div className="searchFoodItems">
-                <input type="text" className="input-search" placeholder="Search Food Name" 
+                <input type="text" className="input-search" placeholder="Search Food Name Or Prices" 
                   onChange={(e) => {setSearchTerm(e.target.value) }}
                 />
               </div>
               <div className="iconCart">
                   <button class="fas fa-shopping-cart" onClick={handleOpenCart} />
+                  {/* <h4 style={{display: 'inline-block'}} onClick={handleOpen}>Cart</h4> */}
               </div>
           </div>
 
