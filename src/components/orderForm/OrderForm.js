@@ -107,7 +107,7 @@ export default function OrderForm(props) {
 
     if (type === "delivery") {
       axios
-        .post("http://localhost:8000/api/online-delivery/create-order", order)
+        .post("https://kasuki-backend.herokuapp.com/api/online-delivery/create-order", order)
         .then((response) => {
           console.log(response.data.data);
           alert("Delivery order is settled");
@@ -119,7 +119,7 @@ export default function OrderForm(props) {
         });
     } else if (type === "takeaway") {
       axios
-        .post("http://localhost:8000/api/online-take-away/create-order", order)
+        .post("https://kasuki-backend.herokuapp.com/api/online-take-away/create-order", order)
         .then((response) => {
           console.log(response.data.data);
           alert("Take away order is settled");
@@ -139,7 +139,7 @@ export default function OrderForm(props) {
     if (type === "delivery") {
       axios
         .delete(
-          `http://localhost:8000/api/online-delivery/delete-order/${orderId}`
+          `https://kasuki-backend.herokuapp.com/api/online-delivery/delete-order/${orderId}`
         )
         .then((response) => {
           console.log(response.data.data);
@@ -152,7 +152,7 @@ export default function OrderForm(props) {
     } else if (type === "takeaway") {
       axios
         .delete(
-          `http://localhost:8000/api/online-take-away/delete-order/${orderId}`
+          `https://kasuki-backend.herokuapp.com/api/online-take-away/delete-order/${orderId}`
         )
         .then((response) => {
           console.log(response.data.data);

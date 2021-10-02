@@ -6,16 +6,16 @@ export default function TableItem({ item ,onClickOpenBookForm}) {
 
   const [table, settable] = useState({});
   useEffect(() => {
-    const getTable = async () => {
-      await axios
-        .get(`http://localhost:8000/api/table/allTable/${item}`)
-        .then((res) => {
-          settable(res.data);
-          console.log(res);
-        });
-    };
     getTable();
   }, [item]);
+  const getTable = async () => {
+    await axios
+      .get(`https://kasuki-backend.herokuapp.com/api/table/allTable/${item}`)
+      .then((res) => {
+        settable(res.data);
+        console.log(res);
+      });
+  };
 
   return (
     <div>

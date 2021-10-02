@@ -63,7 +63,7 @@ function FoodMenu() {
     const [displayAllFoods, setDisplayAllFoods] = useState([]);
 
     const getCategoryList = () => {
-      axios.get("http://localhost:8000/api/category/all-category")
+      axios.get("https://kasuki-backend.herokuapp.com/api/category/all-category")
         .then((response) => {
           console.log(response.data.data);
           setGetallcategories(response.data.data);
@@ -74,7 +74,7 @@ function FoodMenu() {
     }
 
     const getAllFoods = () => {
-      axios.get("http://localhost:8000/api/food/all-food")
+      axios.get("https://kasuki-backend.herokuapp.com/api/food/all-food")
         .then((response) => {
           console.log(response.data.data);
           setDisplayAllFoods(response.data.data);
@@ -82,7 +82,7 @@ function FoodMenu() {
     }
 
     const getCategoryFoods = (id) => {
-      axios.get(`http://localhost:8000/api/category/own-category/${id}`)
+      axios.get(`https://kasuki-backend.herokuapp.com/api/category/own-category/${id}`)
         .then((response) => {
             console.log(response.data.foodItems);
             setDisplayAllFoods(response.data.foodItems);
@@ -110,7 +110,7 @@ function FoodMenu() {
     const [foodId, setFoodId] = useState('');
 
     const getFoodForStar = (id) => {
-        axios.get(`http://localhost:8000/api/food/one-food/${id}`)
+        axios.get(`https://kasuki-backend.herokuapp.com/api/food/one-food/${id}`)
         .then((response) => {
           console.log(response.data.data);
           setFoodName(response.data.data.foodName);
