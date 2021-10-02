@@ -6,8 +6,21 @@ import { useEffect } from 'react';
 
 import Popup from '../popup/Popup';
 import TableCart from '../testCart/TableCart';
+import { makeStyles } from '@material-ui/core/styles';
+import AlertCart from '../alertCart/AlertCart';
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+      width: '100%',
+      '& > * + *': {
+        marginTop: theme.spacing(2),
+      },
+    },
+  }));
 
 function FoodMenu() {
+
+  const classes = useStyles();
 
   const [open, setOpen] = React.useState(false);
 
@@ -27,6 +40,17 @@ function FoodMenu() {
 
   const handleCloseCart = () => {
     setCartOpen(false);
+  };
+
+
+  const [alertOpen, setAlertOpen] = React.useState(false);
+
+  const handleOpenCartAdd = () => {
+    setAlertOpen(true);
+  };
+
+  const handleCloseCartAdd = () => {
+    setAlertOpen(false);
   };
 
     // popup ends here ---------------------------------------------------------
@@ -113,6 +137,7 @@ function FoodMenu() {
           else{
             setCartItem([...cartItem, {...food, qty: 1}]);
           }
+          handleOpenCartAdd();
         }
     
         const onRemove = (food) => {
@@ -130,7 +155,6 @@ function FoodMenu() {
     return (
 
     <div>
-
         <Popup open={open} onClose={handleClose} foodname={foodName} foodid={foodId} />
 
         <TableCart cartopen={cartopen} onClose={handleCloseCart} cartItem={cartItem} onAdd={onAdd} onRemove={onRemove} />
@@ -203,6 +227,12 @@ function FoodMenu() {
   ))} 
 
     </div>
+
+    <AlertCart
+        open={alertOpen}
+        message="Added to cart successfully"
+        onClose={handleCloseCartAdd}
+      />
 
 </section>
 </div>
