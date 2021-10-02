@@ -74,3 +74,71 @@ table, td, th {
   margin-left: 30px;
 }
 
+.orderForm .button-order{
+  display: flex;
+  flex-direction: row;
+}
+
+.orderForm .order-button{
+  margin-top: 4rem;
+  font-size: 1.7rem;
+  color:#fff;
+  background: var(--black);
+  border-radius: .5rem;
+  cursor: pointer;
+  padding: 7px;
+  width: 30%;
+  height: 40px;
+  margin-left: 2px;
+}
+
+.orderForm .order-button:hover{
+  background: var(--orange);
+  font-size: 1.8rem;
+}
+
+.orderForm .order-delete{
+  margin-top: 4rem;
+  font-size: 1.7rem;
+  color:#fff;
+  background: var(--black);
+  border-radius: .5rem;
+  cursor: pointer;
+  padding: 7px;
+  width: 50%;
+  height: 40px;
+  margin-left: 100px;
+}
+
+.order-delete:disabled{
+  margin-top: 4rem;
+  font-size: 1.7rem;
+  color:#fff;
+  background: gray;
+  border-radius: .5rem;
+  cursor: pointer;
+  padding: 7px;
+  width: 50%;
+  height: 40px;
+  margin-left: 100px;
+}
+
+.order-delete:disabled:hover{
+  background: red;
+}
+
+.order-delete:hover{
+  background: var(--orange);
+}
+
+.orderNow-button{
+  margin-top: 2rem;
+  font-size: 1.7rem;
+  color:#fff;
+  background: var(--black);
+  border-radius: .5rem;
+  cursor: pointer;
+  padding: 7px;
+  width: 100%;
+  margin-left: 2px;
+}
