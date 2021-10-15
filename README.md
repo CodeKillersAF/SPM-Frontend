@@ -10,7 +10,7 @@ Member Details
 | Jayakody E. D. D. L     | IT19153278   | Didula-Lakminda |
 | Kothalawala K. L. T. D  | IT19153964   | TharushaDilmith |
 
-This  backend of the Restaurant Management System built using Node.js and Express.js framework &amp; MongoDB as database.
+This  customer frontend of the Restaurant Management System built using React.js.
 
 ## Technologies
 Node.js | React.js | Material UI | CSS | Axios | Firebase
