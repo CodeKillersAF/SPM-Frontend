@@ -1,28 +1,30 @@
-# Restaurant Management System
+# Group ID: 2021S2_REG_WE_38
+## Restaurant Management System
 
-## Available Features
+Member Details
 
-- Customer view available menu item
-- Customer can book tables 
-- Customers can book orders
-- Orders can be Delivery or Takeaway
-- Customers can view available offers
+|         Name            | Student ID   |   Username      |
+| ----------------------- | ------------ | ----------------|
+| Ranasinghe R. A. P. T   | IT19178400   | Pamal-Ranasinghe|
+| Kawsikan K.             | IT19185262   | Kawsikan        |
+| Jayakody E. D. D. L     | IT19153278   | Didula-Lakminda |
+| Kothalawala K. L. T. D  | IT19153964   | TharushaDilmith |
 
-## Learn More
+This  backend of the Restaurant Management System built using Node.js and Express.js framework &amp; MongoDB as database.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Technologies
+Node.js | React.js | Material UI | CSS | Axios | Firebase
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### How to get started
 
-### Install Dependencies
+Prerequisites
+1. Node.js installed in your system
 
+### Run
 ```
 npm install
 ```
-
-### Run
-
 ```
 # Run frontend (:3000) 
 npm start
-
+```
